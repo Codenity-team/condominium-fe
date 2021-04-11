@@ -5,11 +5,23 @@ import {LockOutlined } from '@material-ui/icons';
 import useStyleLogin from '../../styles/auth/LoginScreen-style';
 import { Copyright } from '../../components/Copyright';
 import { Link as LinkRoute} from 'react-router-dom';
+import { useFormik } from 'formik';
+import { validationSchemaLogin } from './validations';
 
 
 export const LoginScreen = () => {
-
     const classes = useStyleLogin();
+
+    const formik = useFormik({
+        validationSchema: validationSchemaLogin,
+        initialValues: {
+            email : '',
+            password : ''
+        },
+        onSubmit: (values)=>{
+            console.log(values)
+        }
+    })
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -20,7 +32,7 @@ export const LoginScreen = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -31,6 +43,10 @@ export const LoginScreen = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
                     />
                     <TextField
                         variant="outlined"
@@ -42,6 +58,10 @@ export const LoginScreen = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        error={formik.touched.password && Boolean(formik.errors.password)}
+                        helperText={formik.touched.password && formik.errors.password}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
