@@ -1,13 +1,17 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
+
+import { SideBar } from '../../components/SideBar';
 
 export const LandingScreen = () => {
     return (
-        <div>
-            <Button variant="contained" color="primary">
-              Material
-            </Button>
-        </div>
-    )
+        <>
+            <SideBar>
+                <Typography paragraph>
+                    GAFO
+                </Typography>
+            </SideBar>       
+        </>
+    );
 }
