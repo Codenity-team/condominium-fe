@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router'
 import PropTypes from 'prop-types'
 
 
-export const PublicRoute = ({
+export const PublicRouter = ({
     isAuth,
     component: Component,
     ...rest
@@ -21,7 +21,7 @@ export const PublicRoute = ({
         />
     )
 }
-PublicRoute.PublicRouter = {
+PublicRouter.PublicRouter = {
     isAuth: PropTypes.bool.isRequired,
     component: PropTypes.func.isRequired
 }

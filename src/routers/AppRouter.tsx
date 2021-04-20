@@ -2,10 +2,10 @@ import React, {useContext} from 'react'
 import {BrowserRouter as Router,Switch,Redirect} from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
-import { LandingScreen } from '../screens/condominium/LandingScreen';
 import { AuthRouter } from './AuthRouter';
-import { PrivateRoute } from './PrivateRoute';
-import { PublicRoute } from './PublicRoute';
+import { DashboardRouter } from './DashboardRouter';
+import { PrivateRouter } from './PrivateRouter';
+import { PublicRouter } from './PublicRouter';
 export const AppRouter = () => {
     const {user:{logged}} = useContext(AuthContext);
     
@@ -13,14 +13,14 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <PublicRoute 
+                    <PublicRouter 
                         path="/auth"
                         component={AuthRouter}
                         isAuth = {logged} 
                     />
-                    <PrivateRoute 
+                    <PrivateRouter 
                         path="/"
-                        component={LandingScreen}
+                        component={DashboardRouter}
                         isAuth = {logged}
                     /> 
                     <Redirect to="/auth"/>         
