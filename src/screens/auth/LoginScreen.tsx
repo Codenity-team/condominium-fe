@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Avatar, Button, Container, CssBaseline, FormControlLabel, 
     Grid, TextField, Typography, Link, Checkbox, Box  } from '@material-ui/core';
 import {LockOutlined } from '@material-ui/icons';
@@ -7,11 +7,16 @@ import { Copyright } from '../../components/Copyright';
 import { Link as LinkRoute} from 'react-router-dom';
 import { useFormik } from 'formik';
 import { validationSchemaLogin } from './validations';
+import { AuthContext } from '../../context/AuthContext';
+import { login } from '../../context/actions/auth/authActions';
+import { setLocalSotrage } from '../../services/generalService';
 
 
 export const LoginScreen = () => {
     const classes = useStyleLogin();
+    const {dispatch} = useContext(AuthContext);
 
+    
     const formik = useFormik({
         validationSchema: validationSchemaLogin,
         initialValues: {
@@ -20,6 +25,8 @@ export const LoginScreen = () => {
         },
         onSubmit: (values)=>{
             console.log(values)
+            dispatch(login('qwewqewq32',values.email));
+            setLocalSotrage('user', {uid:'qwewqewq32', name: values.email})
         }
     })
     return (
